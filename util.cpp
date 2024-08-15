@@ -1,11 +1,11 @@
 #include "Ability.cpp"
 #include <cstdlib>
-#include <set>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
-set<Ability*> parseAndLoad(ifstream& f) {
-	set<Ability*> abilities;
+vector<Ability*> parseAndLoad(ifstream& f) {
+	vector<Ability*> abilities;
 	string line;
 	getline(f, line);
 	while (getline(f, line)) {
@@ -19,17 +19,17 @@ set<Ability*> parseAndLoad(ifstream& f) {
 		ss >> cooldown;
 		ss >> useTime;
 		Ability* temp = new Ability(name, stoi(damage), stoi(cooldown), stoi(useTime));
-		abilities.insert(temp);
+		abilities.push_back(temp);
 	}
 
 	return abilities;
 }
 
-set<Ability*> copyAbilities(set<Ability*> other) {
-	set<Ability*> newSet;
+vector<Ability*> copyAbilities(vector<Ability*>& other) {
+	vector<Ability*> newVec;
 	for (Ability* a : other) {
-		newSet.insert(new Ability(a));
+		newVec.push_back(new Ability(a));
 	}
-	return newSet;
+	return newVec;
 }
 
